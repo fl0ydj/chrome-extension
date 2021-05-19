@@ -4,6 +4,8 @@ import svelte from "rollup-plugin-svelte";
 import zip from "rollup-plugin-zip";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
+import sveltePreprocess from "svelte-preprocess";
+import typescript from "@rollup/plugin-typescript";
 import {
   chromeExtension,
   simpleReloader,
@@ -23,6 +25,7 @@ export default {
     chromeExtension(),
     simpleReloader(),
     svelte({
+      preprocess: sveltePreprocess(),
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production,
@@ -35,6 +38,7 @@ export default {
     }),
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     commonjs(),
+    typescript({ sourceMap: false }),
     // Empties the output dir before a new build
     emptyDir(),
     // If we're building for production, minify
