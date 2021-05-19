@@ -31,7 +31,10 @@ export default {
         dev: !production,
       },
     }),
-    postcss({ minimize: production }),
+    postcss({
+      minimize: production,
+      plugins: [require("tailwindcss"), require("autoprefixer")],
+    }),
     // the plugins below are optional
     resolve({
       dedupe: ["svelte"],

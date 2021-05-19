@@ -10,8 +10,7 @@
         "content/index.ts"
       ],
       "matches": [
-        "https://*/*",
-        "http://*/*"
+        "https://*.youtube.com/*"
       ]
     }
   ],
