@@ -1,8 +1,9 @@
-import Popup from "./Popup.svelte";
-import "./tailwind.css";
+import "../tailwind.css";
 
-const app = new Popup({
-  target: document.body,
-});
+// import Popup from "./Popup.svelte";
 
-export default app;
+// const app = new Popup({
+//   target: document.body,
+// });
+
+// export default app;

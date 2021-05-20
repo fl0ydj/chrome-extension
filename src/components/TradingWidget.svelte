@@ -9,15 +9,61 @@
   } from "chart.js";
   import { onMount } from "svelte";
 
-  const labels = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  const labels = [
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+  ];
   const data = {
     labels: labels,
     datasets: [
       {
         label: "My First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
+        data: Array.from({ length: labels.length }, () => {
+          return Math.random() * 100;
+        }),
+        backgroundColor: "rgb(255,255,0)",
+        fill: "origin",
+        borderColor: "rgb(255,0,0)",
         tension: 0.1,
       },
     ],
@@ -37,19 +83,39 @@
     new Chart(ctx, {
       type: "line",
       data: data,
+      options: {
+        elements: {
+          point: {
+            radius: 0,
+          },
+        },
+        scales: {
+          x: {
+            display: false,
+          },
+          y: {
+            position: "right",
+          },
+        },
+      },
     });
   });
 </script>
 
-<button class="btn btn-green">BUY</button>
-<button class="btn btn-red">SELL</button>
-<canvas id="myChart" width="400" height="50" />
+<div class="card">
+  <div class="flex">
+    <canvas class="p-8" id="myChart" width="200" height="40" />
 
-<style global lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+    <div class="flex-shrink-0 p-8 m-auto place-content-center">
+      <h1 class="text-2xl font-semibold text-center">$CRO2L0</h1>
+      <button class="btn btn-green">BUY</button>
+      <button class="btn btn-red">SELL</button>
+      <h1 class="text-2xl font-semibold text-center">@2.111</h1>
+    </div>
+  </div>
+</div>
 
+<style lang="postcss">
   .btn {
     @apply py-2 px-4 font-semibold rounded-lg shadow-md;
   }
@@ -58,5 +124,9 @@
   }
   .btn-red {
     @apply text-white bg-red-500;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md  m-8;
   }
 </style>

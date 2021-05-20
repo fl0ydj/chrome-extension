@@ -1,4 +1,5 @@
 import TradingWidget from "../components/TradingWidget.svelte";
+import "../tailwind.css";
 
 console.log("content script working");
 
