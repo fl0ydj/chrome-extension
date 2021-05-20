@@ -1,116 +1,79 @@
 <script>
-  import {
-    Chart,
-    LineElement,
-    LineController,
-    CategoryScale,
-    PointElement,
-    LinearScale,
-  } from "chart.js";
   import { onMount } from "svelte";
+  import Highcharts from "highcharts/highstock";
+  import Exporting from "highcharts/modules/exporting";
 
-  const labels = [
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Dec",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-  ];
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: Array.from({ length: labels.length }, () => {
-          return Math.random() * 100;
-        }),
-        backgroundColor: "rgb(255,255,0)",
-        fill: "origin",
-        borderColor: "rgb(255,0,0)",
-        tension: 0.1,
-      },
-    ],
-  };
+  Exporting(Highcharts);
 
-  Chart.register(
-    LineElement,
-    LineController,
-    CategoryScale,
-    PointElement,
-    LinearScale
-  );
+  const data = Array.from({ length: 50 }, () => {
+    return Math.random() * 100;
+  });
 
   onMount(() => {
-    const ctx = document.getElementById("myChart");
-
-    new Chart(ctx, {
-      type: "line",
-      data: data,
-      options: {
-        elements: {
-          point: {
-            radius: 0,
+    Highcharts.stockChart("myChart", {
+      chart: {
+        height: 400,
+      },
+      title: {
+        text: undefined,
+      },
+      subtitle: {
+        text: undefined,
+      },
+      rangeSelector: {
+        selected: 1,
+      },
+      series: [
+        {
+          name: "AAPL Stock Price",
+          data: data,
+          type: "area",
+          threshold: null,
+          tooltip: {
+            valueDecimals: 2,
           },
         },
-        scales: {
-          x: {
-            display: false,
+      ],
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500,
+            },
+            chartOptions: {
+              chart: {
+                height: 300,
+              },
+              subtitle: {
+                text: null,
+              },
+              navigator: {
+                enabled: false,
+              },
+            },
           },
-          y: {
-            position: "right",
-          },
-        },
+        ],
       },
     });
   });
 </script>
 
 <div class="card">
-  <div class="flex">
-    <canvas class="p-8" id="myChart" width="200" height="40" />
+  <div class="flex-grow h-full" id="myChart" />
 
-    <div class="flex-shrink-0 p-8 m-auto place-content-center">
+  <div class="flex flex-col flex-shrink-0 ml-8 justify-evenly">
+    <div>
       <h1 class="text-2xl font-semibold text-center">$CRO2L0</h1>
       <button class="btn btn-green">BUY</button>
       <button class="btn btn-red">SELL</button>
       <h1 class="text-2xl font-semibold text-center">@2.111</h1>
+    </div>
+    <div>
+      <h1>CAP: 3000</h1>
+      <br />
+      <h1>VOL: 3000</h1>
+      <br />
+      <h1>SUP: 3000</h1>
     </div>
   </div>
 </div>
@@ -127,6 +90,6 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-md  m-8;
+    @apply p-8 bg-white rounded-xl shadow-md  m-8 flex;
   }
 </style>
